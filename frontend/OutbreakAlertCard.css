@@ -1,0 +1,47 @@
+.outbreak-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--color-amber-light, #fff3e0);
+  border: 1px solid var(--color-amber, #e0a458);
+  animation: day2-slide-in 0.4s ease both;
+}
+
+.outbreak-card__icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.outbreak-card__title {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text, #3a2e1f);
+}
+
+.outbreak-card__message {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #6b5b45);
+  line-height: 1.4;
+}
+
+@keyframes day2-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outbreak-card {
+    animation: none;
+  }
+}

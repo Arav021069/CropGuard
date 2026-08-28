@@ -1,0 +1,40 @@
+.lang-selector {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.lang-selector__btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--color-surface, #fff8ee);
+  color: var(--color-text, #3a2e1f);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  min-height: 40px;
+}
+
+.lang-selector__btn:active {
+  transform: scale(0.94);
+}
+
+.lang-selector__btn--active {
+  background: var(--color-primary, #2d6a4f);
+  color: #fff;
+  border-color: var(--color-primary-dark, #1b4332);
+}
+
+.lang-selector__flag {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.lang-selector__label {
+  line-height: 1;
+}

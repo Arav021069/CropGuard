@@ -1,0 +1,83 @@
+.streak-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: var(--color-amber-light, #fff3e0);
+  border: 1px solid var(--color-amber, #e0a458);
+}
+
+.streak-badge__icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.streak-badge__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.streak-badge__label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #6b5b45);
+}
+
+.streak-badge__count {
+  font-weight: 700;
+  color: var(--color-text, #3a2e1f);
+}
+
+.streak-badge--celebrate {
+  animation: day3-badge-pulse 0.5s ease 2;
+}
+
+@keyframes day3-badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.streak-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.streak-confetti__piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--color-primary, #2d6a4f);
+  animation: day3-confetti-burst 0.9s ease-out forwards;
+}
+
+.streak-confetti__piece:nth-child(3n) {
+  background: var(--color-amber, #e0a458);
+}
+
+.streak-confetti__piece:nth-child(4n) {
+  background: var(--color-danger, #c1121f);
+}
+
+@keyframes day3-confetti-burst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) rotate(var(--r));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streak-badge--celebrate,
+  .streak-confetti__piece {
+    animation: none;
+  }
+}

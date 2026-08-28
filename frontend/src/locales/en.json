@@ -1,0 +1,30 @@
+{
+  "brand": "Crop Doctor",
+  "upload": {
+    "title": "Is your plant unwell?",
+    "subtitle": "Take a photo of the leaf and we'll tell you what's wrong.",
+    "cta": "Tap to take a photo",
+    "ctaSub": "or choose from gallery",
+    "retake": "Retake",
+    "scanButton": "Scan this plant"
+  },
+  "loading": {
+    "line1": "Looking closely at the leaf...",
+    "line2": "Comparing with known diseases...",
+    "line3": "Almost done..."
+  },
+  "result": {
+    "confidence": "confidence",
+    "severity_low": "Mild",
+    "severity_moderate": "Moderate",
+    "severity_high": "Serious",
+    "listen": "Listen",
+    "speaking": "Speaking...",
+    "adviceTitle": "What to do",
+    "outbreakTitle": "Alert near you",
+    "outbreakText": "{{count}} farmers within {{radius}} km reported this disease this week.",
+    "expertTitle": "Please get this checked",
+    "expertText": "Confidence is moderate. Consult your nearest agriculture officer to confirm.",
+    "scanAgain": "Scan another plant"
+  }
+}
