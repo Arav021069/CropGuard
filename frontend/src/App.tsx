@@ -3,11 +3,19 @@ import './App.css'
 
 type AnalysisState = 'empty' | 'ready' | 'analyzing' | 'complete'
 
+interface Recommendation {
+  overview: string;
+  immediate_actions: string[];
+  treatment: string[];
+  prevention: string[];
+  precautions: string[];
+}
+
 interface AnalysisResult {
   disease: string;
   confidence: number;
   severity: string;
-  recommendation?: string;
+  recommendation?: Recommendation;
 }
 
 function App() {
@@ -31,7 +39,8 @@ function App() {
     setResult(null)
   }
 
-  const analyzeImage = async () => {
+  const analyzeImage = async (event?: React.MouseEvent) => {
+    if (event) event.preventDefault();
     if (!imageFile) return
     
     setAnalysisState('analyzing')
@@ -143,12 +152,44 @@ function App() {
                   <div><span>Severity</span><strong>{result.severity}</strong></div>
                   <p>The AI detected signs consistent with {result.disease.toLowerCase()}.</p>
                 </div>
-                {result.recommendation && (
-                  <div className="finding">
-                    <div><span>Recommendation</span><strong>Action Required</strong></div>
-                    <p>{result.recommendation}</p>
-                  </div>
-                )}
+               {result.recommendation && (
+  <div className="finding">
+    <div>
+      <span>Recommendation</span>
+      <strong>Action Required</strong>
+    </div>
+
+    <p>{result.recommendation.overview}</p>
+
+    <strong>Immediate Actions</strong>
+    <ul>
+      {result.recommendation.immediate_actions.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+
+    <strong>Treatment</strong>
+    <ul>
+      {result.recommendation.treatment.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+
+                      <strong>Prevention</strong>
+                      <ul>
+                        {result.recommendation.prevention.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+
+                      <strong>Precautions</strong>
+                      <ul>
+                        {result.recommendation.precautions.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
               </div>
             </div>
           ) : (
@@ -166,7 +207,7 @@ function App() {
           className="analyze-button" 
           type="button" 
           disabled={!imageUrl || analysisState === 'analyzing'} 
-          onClick={analysisState === 'complete' ? clearImage : analyzeImage}
+          onClick={(e) => analyzeImage(e)}
         >
           {analysisState === 'analyzing' ? 'Reading your plant...' : analysisState === 'complete' ? 'Analyze another photo' : 'Analyze my plant'}
           <span>→</span>

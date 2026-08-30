@@ -6,6 +6,8 @@ from torchvision import models, transforms
 from PIL import Image
 import io
 from pathlib import Path
+from llm_service import get_llm_recommendation_rag
+from rag.retriever import retrieve_knowledge, generate_rag_prompt
 
 app = FastAPI()
 
@@ -22,15 +24,12 @@ app.add_middleware(
 
 # --- ML CONFIGURATION ---
 MODEL_PATH = Path("models/cropguard_model.pth")
-
 CLASS_NAMES = [
     "Pepper__bell___Bacterial_spot",
     "Pepper__bell___healthy",
-
     "Potato___Early_blight",
     "Potato___Late_blight",
     "Potato___healthy",
-
     "Tomato_Bacterial_spot",
     "Tomato_Early_blight",
     "Tomato_Late_blight",
@@ -43,7 +42,7 @@ CLASS_NAMES = [
     "Tomato_healthy"
 ]
 
-# Load model globally to avoid reloading on every request
+# Load model globally
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = models.resnet18()
 num_ftrs = model.fc.in_features
@@ -68,24 +67,34 @@ def root():
 
 @app.post("/analyze")
 async def analyze(image: UploadFile = File(...)):
-    # Read image
-    img_bytes = await image.read()
-    img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
-    
-    # Preprocess and Predict
-    img_tensor = preprocess(img).unsqueeze(0).to(device)
-    
-    with torch.no_grad():
-        outputs = model(img_tensor)
-        probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
-        confidence, class_idx = torch.max(probabilities, 0)
+    try:
+        # Read image
+        img_bytes = await image.read()
+        img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
         
-    disease_name = CLASS_NAMES[class_idx.item()]
-    conf_score = confidence.item()
+        # Preprocess and Predict
+        img_tensor = preprocess(img).unsqueeze(0).to(device)
+        
+        with torch.no_grad():
+            outputs = model(img_tensor)
+            probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
+            confidence, class_idx = torch.max(probabilities, 0)
+            
+        disease_name = CLASS_NAMES[class_idx.item()]
+        conf_score = confidence.item()
 
-    return {
-        "disease": disease_name,
-        "confidence": round(conf_score, 2),
-        "severity": "calculated based on confidence", # You can implement a severity logic here
-        "recommendation": f"Consult an agricultural expert regarding {disease_name}."
-    }
+        # RAG Pipeline: Retrieve knowledge and generate prompt
+        chunks = retrieve_knowledge(disease_name)
+        prompt = generate_rag_prompt(disease_name, chunks)
+        
+        # Get LLM response using the RAG prompt
+        recommendation_data = get_llm_recommendation_rag(prompt)
+
+        return {
+            "disease": disease_name,
+            "confidence": round(conf_score, 2),
+            "severity": "calculated based on confidence", 
+            "recommendation": recommendation_data
+        }
+    except Exception as e:
+        return {"error": str(e)}
