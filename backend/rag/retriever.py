@@ -2,6 +2,8 @@ from sentence_transformers import SentenceTransformer
 import chromadb
 from pathlib import Path
 
+from services.weather_service import get_weather
+
 # Configuration
 DB_PATH = Path("chroma_db")
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
@@ -35,11 +37,20 @@ def retrieve_knowledge(query: str, top_k: int = 3):
     # print(retrieved_chunks)
     return retrieved_chunks
 
-def generate_rag_prompt(disease_name: str, chunks: list):
+def generate_rag_prompt(disease_name: str, chunks: list, latitude=None, longitude=None):
     """
     Constructs the system prompt for the LLM using retrieved chunks.
     """
     context = "\n\n".join([f"[Retrieved Chunk {i+1}] {chunk}" for i, chunk in enumerate(chunks)])
+
+    weather = {}
+
+    try:
+        if latitude and longitude:
+            print(f"Fetching weather for latitude: {latitude}, longitude: {longitude}")
+            weather = get_weather(latitude, longitude)
+    except Exception as e:
+        print(f"Weather API failed: {e}")
 
     prompt = f"""
     You are CropGuard, an agricultural advisory assistant.
@@ -52,6 +63,12 @@ def generate_rag_prompt(disease_name: str, chunks: list):
     --- KNOWLEDGE BASE ---
     {context}
     --- END KNOWLEDGE BASE ---
+    
+    CURRENT WEATHER:
+    Temperature: {weather["current"]["temperature_2m"]} °C
+    Humidity: {weather["current"]["relative_humidity_2m"]} %
+    Precipitation: {weather["current"]["precipitation"]} mm
+    Wind speed: {weather["current"]["wind_speed_10m"]} km/h
 
     Provide a concise and practical recommendation containing:
 
