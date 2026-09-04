@@ -1,0 +1,47 @@
+.risk-indicator {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: var(--radius-md, 16px);
+}
+
+.risk-indicator__icon {
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.risk-indicator__label {
+  font-family: var(--font-display, inherit);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.risk-indicator__desc {
+  font-size: 12.5px;
+  color: var(--color-ink-soft, #6B6255);
+  margin-top: 2px;
+}
+
+.risk-indicator--low {
+  background: var(--color-leaf-soft, #DCEAE0);
+}
+.risk-indicator--low .risk-indicator__label {
+  color: var(--color-leaf-deep, #24513A);
+}
+
+.risk-indicator--medium {
+  background: var(--color-wheat-soft, #FBEDD3);
+}
+.risk-indicator--medium .risk-indicator__label {
+  color: #8A5A0E;
+}
+
+.risk-indicator--high {
+  background: var(--color-terracotta-soft, #F7DFD6);
+}
+.risk-indicator--high .risk-indicator__label {
+  color: var(--color-terracotta, #C1502E);
+}

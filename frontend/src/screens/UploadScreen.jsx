@@ -1,21 +1,53 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import CropSelector from '../components/CropSelector';
+import SoilDetailsSection from '../components/SoilDetailsSection';
+import { buildDiagnosisRequest } from '../api/buildDiagnosisRequest';
 
 export default function UploadScreen({ photo, setPhoto }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const fileRef = useRef(null);
+  const rawFileRef = useRef(null);
   const preview = photo;
+
+  // New optional fields — none of these block the existing Upload -> Loading
+  // -> Result -> History flow. Only the plant photo is required to scan.
+  const [crop, setCrop] = useState(null);
+  const [soilValues, setSoilValues] = useState({
+    ph: '',
+    nitrogen: '',
+    phosphorus: '',
+    potassium: '',
+  });
+  const [soilReport, setSoilReport] = useState(null);
+  const [location, setLocation] = useState(null);
 
   function handleFile(e) {
     const file = e.target.files?.[0];
     if (!file) return;
+    rawFileRef.current = file;
     setPhoto(URL.createObjectURL(file));
   }
 
   function handleScan() {
-    navigate('/loading');
+    // Backend-ready request object, built for future use only — nothing
+    // here calls a network endpoint. See src/api/buildDiagnosisRequest.js.
+    const diagnosisRequest = buildDiagnosisRequest({
+      crop,
+      soilPH: soilValues.ph,
+      nitrogen: soilValues.nitrogen,
+      phosphorus: soilValues.phosphorus,
+      potassium: soilValues.potassium,
+      location,
+      soilReport,
+      plantImage: rawFileRef.current,
+    });
+
+    navigate('/loading', {
+      state: { image: rawFileRef.current, crop, diagnosisRequest },
+    });
   }
 
   return (
@@ -24,6 +56,17 @@ export default function UploadScreen({ photo, setPhoto }) {
         <h1>{t('upload.title')}</h1>
         <p>{t('upload.subtitle')}</p>
       </div>
+
+      <CropSelector value={crop} onChange={setCrop} />
+
+      <SoilDetailsSection
+        soilValues={soilValues}
+        onSoilValuesChange={setSoilValues}
+        soilReport={soilReport}
+        onSoilReportChange={setSoilReport}
+        location={location}
+        onLocationChange={setLocation}
+      />
 
       {!preview ? (
         <label className="upload-dropzone">
@@ -57,7 +100,7 @@ export default function UploadScreen({ photo, setPhoto }) {
       )}
 
       <div className="sticky-cta">
-        <button className="btn-primary" disabled={!preview} onClick={handleScan}>
+        <button className="btn-primary tap-target" disabled={!preview} onClick={handleScan}>
           {t('upload.scanButton')}
         </button>
       </div>

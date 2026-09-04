@@ -1,0 +1,44 @@
+.soil-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.soil-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.soil-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-ink, #2B2620);
+}
+
+.soil-field input {
+  border: 1.5px solid var(--color-border, #E4DAC8);
+  border-radius: var(--radius-sm, 10px);
+  padding: 10px 12px;
+  font-family: var(--font-body, inherit);
+  font-size: 15px;
+  min-height: 44px;
+  background: var(--color-surface, #fff);
+  color: var(--color-ink, #2B2620);
+}
+
+.soil-field input:focus {
+  outline: none;
+  border-color: var(--color-leaf, #3F7D52);
+}
+
+.soil-field__hint {
+  font-size: 11.5px;
+  color: var(--color-ink-soft, #6B6255);
+}
+
+.soil-field__hint--error {
+  color: var(--color-terracotta, #C1502E);
+  font-weight: 600;
+}

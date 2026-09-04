@@ -26,6 +26,18 @@
   --shadow-card: 0 2px 14px rgba(43, 38, 32, 0.08);
 
   color-scheme: light;
+
+  /* Aliases so Day 2/3 delivered components (which use a different
+     variable naming convention) render with the real app theme instead
+     of falling back to their own hardcoded defaults. */
+  --color-primary: var(--color-leaf-deep);
+  --color-primary-dark: var(--color-leaf-deep);
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-ink-soft);
+  --color-amber: var(--color-wheat);
+  --color-amber-light: var(--color-wheat-soft);
+  --color-danger: var(--color-terracotta);
+  --color-success: var(--color-leaf);
 }
 
 * { box-sizing: border-box; }
@@ -56,6 +68,19 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .topbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 6px; }
 .brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--color-leaf-deep); }
+
+.topbar-actions { display: flex; align-items: center; gap: 10px; }
+
+.history-nav-btn {
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: 50%;
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+
+.history-link-btn { margin-top: 14px; }
 
 .lang-select {
   border: 1.5px solid var(--color-border);
@@ -172,6 +197,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 .result-header { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 16px; animation: riseIn .45s ease .05s both; }
 .result-header h2 { font-size: 21px; }
 .result-header .meta { font-size: 13px; color: var(--color-ink-soft); margin-top: 3px; }
+.result-crop-chip { font-size: 12.5px; font-weight: 600; color: var(--color-leaf-deep); margin-top: 6px; }
 @keyframes riseIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 .badge { border-radius: 100px; padding: 6px 13px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }

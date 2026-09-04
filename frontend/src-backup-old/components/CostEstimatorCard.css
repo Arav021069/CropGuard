@@ -1,0 +1,93 @@
+.cost-card {
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--color-surface, #fff8ee);
+  border: 1px solid var(--color-border, #e8dfce);
+  box-shadow: var(--shadow-card, none);
+  margin-top: 14px;
+}
+
+.cost-card__title {
+  margin: 0 0 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text, #3a2e1f);
+}
+
+.cost-toggle {
+  position: relative;
+  display: flex;
+  background: var(--color-border, #e8dfce);
+  border-radius: 999px;
+  padding: 4px;
+  min-height: 44px;
+}
+
+.cost-toggle__option {
+  flex: 1;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #6b5b45);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.cost-toggle__option--active {
+  color: #fff;
+}
+
+.cost-toggle__thumb {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  border-radius: 999px;
+  background: var(--color-primary, #2d6a4f);
+  transition: transform 0.25s ease;
+}
+
+.cost-toggle__thumb--right {
+  transform: translateX(100%);
+}
+
+.cost-card__amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 16px;
+  animation: day2-fade-in 0.3s ease both;
+}
+
+.cost-card__value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary-dark, #1b4332);
+}
+
+.cost-card__label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #6b5b45);
+}
+
+.cost-card__note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #6b5b45);
+  font-style: italic;
+}
+
+@keyframes day2-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cost-card__amount {
+    animation: none;
+  }
+}

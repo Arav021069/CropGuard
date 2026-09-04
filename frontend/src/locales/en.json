@@ -1,5 +1,5 @@
 {
-  "brand": "Crop Doctor",
+  "brand": "Crop Guard",
   "upload": {
     "title": "Is your plant unwell?",
     "subtitle": "Take a photo of the leaf and we'll tell you what's wrong.",
@@ -26,5 +26,38 @@
     "expertTitle": "Please get this checked",
     "expertText": "Confidence is moderate. Consult your nearest agriculture officer to confirm.",
     "scanAgain": "Scan another plant"
+  },
+  "diseases": {
+    "early_blight": "Early Blight"
+  },
+  "adviceItems": {
+    "remove_leaves": "Remove affected leaves",
+    "neem_spray": "Apply neem spray",
+    "avoid_overhead": "Avoid overhead watering"
+  },
+  "cost": {
+    "title": "Estimated Treatment Cost",
+    "organic": "Organic",
+    "chemical": "Chemical",
+    "perAcre": "per acre (approx.)",
+    "organicNote": "Eco-friendly, safe for soil, may take a little longer to show results.",
+    "chemicalNote": "Faster results — use as directed and follow safety precautions."
+  },
+  "history": {
+    "title": "Scan History",
+    "empty": "No scans yet. Your past scans will appear here.",
+    "navLabel": "History",
+    "back": "Back",
+    "viewLink": "View scan history"
+  },
+  "streak": {
+    "label": "Healthy Farm Streak",
+    "days": "{{count}} day streak",
+    "days_one": "{{count}} day streak"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "message": "We couldn't complete the diagnosis. Please try again.",
+    "retry": "Try again"
   }
 }

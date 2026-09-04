@@ -1,0 +1,36 @@
+.location-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  border: 1.5px solid var(--color-border, #E4DAC8);
+  background: var(--color-surface, #fff);
+  border-radius: var(--radius-md, 16px);
+  color: var(--color-leaf-deep, #24513A);
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 14px;
+}
+
+.location-btn:active {
+  transform: scale(0.98);
+}
+
+.location-btn:disabled {
+  opacity: 0.6;
+}
+
+.location-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: var(--radius-md, 16px);
+  background: var(--color-leaf-soft, #DCEAE0);
+  color: var(--color-leaf-deep, #24513A);
+  font-weight: 700;
+  font-size: 13.5px;
+}
