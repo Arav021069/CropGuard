@@ -1,0 +1,63 @@
+{
+  "brand": "Crop Guard",
+  "upload": {
+    "title": "Is your plant unwell?",
+    "subtitle": "Take a photo of the leaf and we'll tell you what's wrong.",
+    "cta": "Tap to take a photo",
+    "ctaSub": "or choose from gallery",
+    "retake": "Retake",
+    "scanButton": "Scan this plant"
+  },
+  "loading": {
+    "line1": "Looking closely at the leaf...",
+    "line2": "Comparing with known diseases...",
+    "line3": "Almost done..."
+  },
+  "result": {
+    "confidence": "confidence",
+    "severity_low": "Mild",
+    "severity_moderate": "Moderate",
+    "severity_high": "Serious",
+    "listen": "Listen",
+    "speaking": "Speaking...",
+    "adviceTitle": "What to do",
+    "outbreakTitle": "Alert near you",
+    "outbreakText": "{{count}} farmers within {{radius}} km reported this disease this week.",
+    "expertTitle": "Please get this checked",
+    "expertText": "Confidence is moderate. Consult your nearest agriculture officer to confirm.",
+    "scanAgain": "Scan another plant"
+  },
+  "diseases": {
+    "early_blight": "Early Blight"
+  },
+  "adviceItems": {
+    "remove_leaves": "Remove affected leaves",
+    "neem_spray": "Apply neem spray",
+    "avoid_overhead": "Avoid overhead watering"
+  },
+  "cost": {
+    "title": "Estimated Treatment Cost",
+    "organic": "Organic",
+    "chemical": "Chemical",
+    "perAcre": "per acre (approx.)",
+    "organicNote": "Eco-friendly, safe for soil, may take a little longer to show results.",
+    "chemicalNote": "Faster results — use as directed and follow safety precautions."
+  },
+  "history": {
+    "title": "Scan History",
+    "empty": "No scans yet. Your past scans will appear here.",
+    "navLabel": "History",
+    "back": "Back",
+    "viewLink": "View scan history"
+  },
+  "streak": {
+    "label": "Healthy Farm Streak",
+    "days": "{{count}} day streak",
+    "days_one": "{{count}} day streak"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "message": "We couldn't complete the diagnosis. Please try again.",
+    "retry": "Try again"
+  }
+}

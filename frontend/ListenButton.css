@@ -1,0 +1,66 @@
+.listen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  min-height: 48px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-primary, #2d6a4f);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.listen-btn:active {
+  transform: scale(0.95);
+}
+
+.listen-btn--active {
+  background: var(--color-primary-dark, #1b4332);
+}
+
+.listen-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+}
+
+.listen-btn__speaker {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Animated sound wave shown while speaking */
+.sound-wave {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.sound-wave span {
+  width: 3px;
+  background: #fff;
+  border-radius: 2px;
+  animation: day2-sound-wave 0.9s ease-in-out infinite;
+}
+
+.sound-wave span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+.sound-wave span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+.sound-wave span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+.sound-wave span:nth-child(4) { height: 16px; animation-delay: 0.45s; }
+
+@keyframes day2-sound-wave {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-wave span {
+    animation: none;
+  }
+}
